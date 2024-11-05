@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { useAuth } from '../context/AuthContext';
 
 // Lazy load pages
 const Dashboard = React.lazy(() => import('../pages/Dashboard'));
@@ -11,19 +12,33 @@ const Social = React.lazy(() => import('../pages/Social'));
 const Clients = React.lazy(() => import('../pages/Clients'));
 const Settings = React.lazy(() => import('../pages/Settings'));
 const Security = React.lazy(() => import('../pages/Security'));
+const Login = React.lazy(() => import('../pages/Login'));
+
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <Navigate to="/login" />;
+}
 
 export default function AppRoutes() {
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/financial" element={<Financial />} />
-        <Route path="/marketing" element={<Marketing />} />
-        <Route path="/insights" element={<Insights />} />
-        <Route path="/social" element={<Social />} />
-        <Route path="/clients" element={<Clients />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/security" element={<Security />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/financial" element={<ProtectedRoute><Financial /></ProtectedRoute>} />
+        <Route path="/marketing" element={<ProtectedRoute><Marketing /></ProtectedRoute>} />
+        <Route path="/insights" element={<ProtectedRoute><Insights /></ProtectedRoute>} />
+        <Route path="/social" element={<ProtectedRoute><Social /></ProtectedRoute>} />
+        <Route path="/clients" element={<ProtectedRoute><Clients /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+        <Route path="/security" element={<ProtectedRoute><Security /></ProtectedRoute>} />
       </Routes>
     </Suspense>
   );

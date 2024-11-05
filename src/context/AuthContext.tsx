@@ -1,41 +1,40 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { auth } from '../services/auth';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
+import '../services/firebaseConfig'; // Ensures Firebase is initialized
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  user: any;
+  user: User | null;
   login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
+  const auth = getAuth();
 
   useEffect(() => {
-    const token = auth.getToken();
-    const userData = auth.getUser();
-    if (token && userData) {
-      setIsAuthenticated(true);
-      setUser(userData);
-    }
-  }, []);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setIsAuthenticated(!!user);
+    });
+    return () => unsubscribe();
+  }, [auth]);
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await auth.login({ email, password });
-      setIsAuthenticated(true);
-      setUser(response.user);
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       console.error('Login failed:', error);
       throw error;
     }
   };
 
-  const logout = () => {
-    auth.logout();
+  const logout = async () => {
+    await signOut(auth);
     setIsAuthenticated(false);
     setUser(null);
   };
@@ -49,7 +48,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;

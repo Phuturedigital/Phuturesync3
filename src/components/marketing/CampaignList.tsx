@@ -76,6 +76,20 @@ const campaigns: Campaign[] = [
     description: 'Corporate branding and thought leadership campaign',
     startDate: '2024-02-15',
     endDate: '2024-03-15'
+  },
+  {
+    id: 4,
+    name: 'Brand Awareness',
+    platform: 'tiktok',
+    status: 'active',
+    reach: '15.3K',
+    engagement: '2.5K',
+    conversions: 189,
+    spend: 'R 3,200',
+    roi: '2.1x',
+    description: 'Corporate branding and thought leadership campaign',
+    startDate: '2024-02-15',
+    endDate: '2024-03-15'
   }
 ];
 
@@ -83,7 +97,8 @@ const platformColors = {
   facebook: 'border-blue-500',
   instagram: 'border-purple-500',
   linkedin: 'border-blue-700',
-  twitter: 'border-blue-400'
+  twitter: 'border-blue-400',
+  tiktok: 'border-blue-400'
 };
 
 const CampaignCard = ({ campaign }: { campaign: Campaign }) => {

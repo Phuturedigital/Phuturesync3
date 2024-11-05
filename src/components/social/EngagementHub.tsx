@@ -17,6 +17,14 @@ const interactions = [
     user: 'John D.',
     content: 'Liked your post about sustainable packaging',
     time: '15m ago'
+  },
+  {
+    id: 3,
+    type: 'like',
+    platform: 'TikTok',
+    user: 'Anna D.',
+    content: 'Liked your post about sustainable packaging',
+    time: '15m ago'
   }
 ];
 

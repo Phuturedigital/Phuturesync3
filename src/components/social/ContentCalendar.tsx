@@ -18,6 +18,14 @@ const scheduledPosts = [
     type: 'carousel',
     status: 'draft'
   }
+  {
+    id: 3,
+    title: 'Success Story',
+    platform: 'TikTok',
+    scheduledFor: '2024-03-21 2:00 PM',
+    type: 'carousel',
+    status: 'draft'
+  }
 ];
 
 export default function ContentCalendar() {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Play, Pause, BarChart3, Settings, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Play, Pause, BarChart3, Settings, Facebook, Instagram, TikTok, Linkedin } from 'lucide-react';
+import { FaTiktok } from 'react-icons/fa';
 import { api } from '../../services/api';
 import LoadingSpinner from '../LoadingSpinner';
 
@@ -18,13 +19,15 @@ interface Campaign {
 const platformIcons = {
   facebook: Facebook,
   instagram: Instagram,
-  linkedin: Linkedin
+  linkedin: Linkedin,
+  tiktok: FaTiktok
 };
 
 const platformColors = {
   facebook: 'border-blue-500',
   instagram: 'border-purple-500',
-  linkedin: 'border-blue-700'
+  linkedin: 'border-blue-700',
+  tiktok: 'border-blue-700'
 };
 
 export default function ActiveCampaigns() {

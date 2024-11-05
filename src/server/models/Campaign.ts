@@ -14,7 +14,7 @@ const campaignSchema = new Schema({
   platform: {
     type: String,
     required: true,
-    enum: ['facebook', 'instagram', 'linkedin', 'twitter']
+    enum: ['facebook', 'instagram', 'linkedin', 'twitter', 'tiktok']
   },
   status: {
     type: String,

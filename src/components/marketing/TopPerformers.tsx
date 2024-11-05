@@ -26,6 +26,14 @@ const topPosts = [
     engagement: '1.2K',
     roi: '2.1x',
   },
+  {
+    id: 4,
+    title: 'Product Showcase',
+    platform: 'TikTok',
+    reach: '8.7K',
+    engagement: '1.2K',
+    roi: '2.1x',
+  },
 ];
 
 export default function TopPerformers() {

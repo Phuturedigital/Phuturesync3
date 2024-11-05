@@ -15,6 +15,7 @@ const platforms = [
   { value: 'facebook', label: 'Facebook' },
   { value: 'instagram', label: 'Instagram' },
   { value: 'linkedin', label: 'LinkedIn' },
+  { value: 'tiktok', label: 'TikTok' },
   { value: 'google', label: 'Google Ads' },
 ];
 

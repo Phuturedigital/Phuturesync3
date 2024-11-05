@@ -64,6 +64,20 @@ export const handlers = [
         startDate: '2024-02-15',
         endDate: '2024-03-15'
       }
+      {
+        id: 3,
+        name: 'Brand Awareness',
+        platform: 'tiktok',
+        status: 'active',
+        reach: '15.3K',
+        engagement: '2.5K',
+        conversions: 189,
+        spend: 'R 3,200',
+        roi: '2.1x',
+        description: 'Corporate branding and thought leadership campaign',
+        startDate: '2024-02-15',
+        endDate: '2024-03-15'
+      }
     ]);
   }),
 
